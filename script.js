@@ -15,6 +15,25 @@ const operate = (operator, a, b) => {
   }
 };
 
+const display = document.querySelector(".display");
+display.textContent = "0";
+
+let actualNumber = 0;
+
+function insert(e) {
+  if (display.textContent === "0") {
+    display.textContent = e.target.value;
+    actualNumber = +display.textContent;
+  } else {
+    display.textContent += e.target.value;
+    actualNumber = +display.textContent;
+  }
+}
+
+function clear() {
+  display.textContent = "0";
+}
+
 const seven = document
   .querySelector(".seven")
   .addEventListener("click", insert);
@@ -35,3 +54,6 @@ const multiplyButton = document.querySelector(".multiply");
 const subtractButton = document.querySelector(".subtract");
 const addButton = document.querySelector(".add");
 const divideButton = document.querySelector(".divide");
+const clearButton = document
+  .querySelector(".clear")
+  .addEventListener("click", clear);
