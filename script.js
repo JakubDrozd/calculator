@@ -20,10 +20,18 @@ const operate = (operator, a, b) => {
     if (b == 0) {
       display.textContent = "ERROR";
       actualNumber = 0;
+      actualOperator = "";
+      firstNumber = 0;
     } else {
       actualNumber = divide(a, b);
       display.textContent = actualNumber;
     }
+  }
+  if (display.textContent.length > 8) {
+    display.textContent = "ERROR";
+    actualNumber = 0;
+    actualOperator = "";
+    firstNumber = 0;
   }
 };
 let actualOperator = "";
@@ -40,13 +48,15 @@ function insert(e) {
     display.textContent += e.target.value;
   }
   actualNumber = +display.textContent;
+  if (display.textContent.length > 8) {
+    display.textContent = "ERROR";
+    actualNumber = 0;
+    actualOperator = "";
+    firstNumber = 0;
+  }
 }
 
 function pickOperator(e) {
-  console.log(actualNumber);
-  if (actualNumber.toString().length > 8) {
-    display.textContent = "isNAN";
-  }
   if (firstNumber > 0) {
     operate();
   }
