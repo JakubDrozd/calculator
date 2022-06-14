@@ -11,6 +11,7 @@ body {
   flex-direction: column;
   gap: 1em;
   flex-wrap: wrap;
+  border-radius: 4px;
 }
 .buttons {
   display: flex;
@@ -23,4 +24,11 @@ body {
   border: 1px solid #333;
   padding: 3px;
   text-align: right;
+}
+
+.operation {
+  background-color: orange;
+}
+.clear-button {
+  background-color: gold;
 }

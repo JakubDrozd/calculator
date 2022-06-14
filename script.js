@@ -4,58 +4,62 @@ const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
 const operate = (operator, a, b) => {
+  operator = actualOperator;
+  a = firstNumber;
+  b = actualNumber;
   if (operator === "+") {
-    return add(a, b);
+    actualNumber = add(a, b);
+    display.textContent = actualNumber;
   } else if (operator === "-") {
-    return subtract(a, b);
+    actualNumber = subtract(a, b);
+    display.textContent = actualNumber;
   } else if (operator === "*") {
-    return multiply(a, b);
+    actualNumber = multiply(a, b);
+    display.textContent = actualNumber;
   } else if (operator === "/") {
     if (b == 0) {
-      return "ERROR";
+      display.textContent = "ERROR";
+      actualNumber = 0;
     } else {
-      return divide(a, b);
+      actualNumber = divide(a, b);
+      display.textContent = actualNumber;
     }
   }
 };
-
+let actualOperator = "";
+let actualNumber = 0;
 let firstNumber = 0;
-let secondNumber = 0;
-
-function pickOperator(e) {
-  if (!firstNumber) {
-    operator = e.target.value;
-    firstNumber = number;
-    display.textContent = 0;
-    number = 0;
-  } else {
-    secondNumber = number;
-  }
-}
 
 const display = document.querySelector(".display");
-display.textContent = "0";
-
-let operator = "";
-
-let number = 0;
+display.textContent = actualNumber;
 
 function insert(e) {
-  if (display.textContent === "0") {
+  if (actualNumber === 0) {
     display.textContent = e.target.value;
-    firstNumber = +display.textContent;
-    console.log(firstNumber);
   } else {
     display.textContent += e.target.value;
-    firstNumber = +display.textContent;
-    console.log(firstNumber);
   }
+  actualNumber = +display.textContent;
+}
+
+function pickOperator(e) {
+  console.log(actualNumber);
+  if (actualNumber.toString().length > 8) {
+    display.textContent = "isNAN";
+  }
+  if (firstNumber > 0) {
+    operate();
+  }
+  actualOperator = e.target.value;
+  firstNumber = actualNumber;
+  display.textContent = actualNumber;
+  actualNumber = 0;
 }
 
 function clear() {
+  actualNumber = 0;
   display.textContent = "0";
-  number = 0;
-  console.log(number);
+  actualOperator = "";
 }
 
 const seven = document
@@ -88,7 +92,7 @@ const divideButton = document
   .addEventListener("click", pickOperator);
 const equalsButton = document
   .querySelector(".equals")
-  .addEventListener("click", operate(operator, firstNumber, number));
+  .addEventListener("click", operate);
 const clearButton = document
   .querySelector(".clear")
   .addEventListener("click", clear);
